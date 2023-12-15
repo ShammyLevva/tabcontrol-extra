@@ -47,7 +47,7 @@ namespace TradeWright.UI.Forms
         }
  
  		public static IntPtr ToIntPtr(object structure){
-			IntPtr lparam = IntPtr.Zero;
+			IntPtr lparam;
 			lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(structure));
 			Marshal.StructureToPtr(structure, lparam, false);
 			return lparam;
@@ -93,23 +93,23 @@ namespace TradeWright.UI.Forms
 
 		[StructLayout(LayoutKind.Sequential)]
 		public struct RECT{
-		    public int left;
-		    public int top;
-		    public int right;
-		    public int bottom;
+		    public int _left;
+		    public int _top;
+		    public int _right;
+		    public int _bottom;
 		    
 		    public RECT(int left, int top, int right, int bottom){
-		        this.left = left;
-		        this.top = top;
-		        this.right = right;
-		        this.bottom = bottom;
+                _left = left;
+		        _top = top;
+		        _right = right;
+		        _bottom = bottom;
 		    }
 		
 		    public RECT(Rectangle r){
-		        this.left = r.Left;
-		        this.top = r.Top;
-		        this.right = r.Right;
-		        this.bottom = r.Bottom;
+		        _left = r.Left;
+		        _top = r.Top;
+		        _right = r.Right;
+		        _bottom = r.Bottom;
 		    }
 		
 		    public static RECT FromXYWH(int x, int y, int width, int height){
@@ -121,9 +121,9 @@ namespace TradeWright.UI.Forms
 		    	return rect;
 		    }
 		    
-		    public Size Size{
+		    public readonly Size Size{
 		        get{
-		            return new Size(this.right - this.left, this.bottom - this.top);
+		            return new Size(_right - _left, _bottom - _top);
 		        }
 		    }
 		}
